@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}+${minecraftVersion}",
+  "name": "${name}",
+  "description": "${description}",
+  "icon": "assets/${id}/icon.png",
+  "license": "${license}",
+  "authors": [
+    "${author}"
+  ],
+  "contact": {
+    "homepage":"https://github.com/TheSmoothRere/DepleteTell",
+    "source": "https://github.com/TheSmoothRere/DepleteTell",
+    "issue": "https://github.com/TheSmoothRere/DepleteTell/issues"
+  },
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "io.github.thesmoothrere.depletetell.DepleteTell"
+    ],
+    "client": [
+      "io.github.thesmoothrere.depletetell.client.DepleteTellClient"
+    ],
+    "relib": [
+      "io.github.thesmoothrere.depletetell.config.DepleteConfig"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "${id}.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "minecraft": ">=${minecraftVersion}",
+    "java": "~${javaVersion}"
+  }
+}

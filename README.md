@@ -37,6 +37,13 @@ Choose how durability is displayed. Three styles are available:
 |:-----------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------:|
 | ![percentage](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/display_type_percentage.png) | ![bar](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/display_type_bar.png) | ![number](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/display_type_number.png) |
 
+## Required Dependencies
+
+| Mod        |                    Modrinth                     |                              CurseForge                               |
+|------------|:-----------------------------------------------:|:---------------------------------------------------------------------:|
+| Fabric API | [Modrinth](https://modrinth.com/mod/fabric-api) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-api) |
+| ReLib      |   [Modrinth](https://modrinth.com/mod/relib)    |   [CurseForge](https://www.curseforge.com/minecraft/mc-mods/relib)    |
+
 ## Configuration
 
 For a full configuration guide, see the [Wiki](https://github.com/TheSmoothRere/DepleteTell/wiki).

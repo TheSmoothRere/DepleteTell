@@ -58,26 +58,16 @@ jobs:
       - name: Build submodule jar
         run: ./gradlew :${{ steps.parse_tag.outputs.mc_version }}:build
 
-      - name: Check Changelog Build
-        id: changelog_check
-        run: |
-          CHANGELOG_PATH="changelogs/${{ github.ref_name }}.md"
-          if [ -f "$CHANGELOG_PATH" ]; then
-            echo "path=$CHANGELOG_PATH" >> $GITHUB_OUTPUT
-          else
-            echo "path=" >> $GITHUB_OUTPUT
-          fi
-
       - name: Create github release
         uses: softprops/action-gh-release@v3
         with:
           name: "${{ steps.root_props.outputs.mod_name }} ${{ github.ref_name }}"
           draft: false
           prerelease: false
-          body_path: ${{ steps.changelog_check.outputs.exists == 'true' && steps.changelog_check.outputs.path || '' }}
-          body: ${{ steps.changelog_check.outputs.exists == 'false' && 'Automatically released by github actions.' || '' }}
+          body_path: changelogs/${{ github.ref_name }}.md
           files: |
             ${{ steps.parse_tag.outputs.mc_version }}/build/libs/*.jar
             LICENSE
+            changelogs/${{ github.ref_name }}.md
             README.md
           token: ${{ secrets.PAT_GITHUB }}

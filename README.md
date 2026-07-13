@@ -46,7 +46,7 @@ Choose how durability is displayed. Three styles are available:
 
 ## Configuration
 
-For a full configuration guide, see the [Wiki](https://github.com/TheSmoothRere/DepleteTell/wiki).
+For a full configuration guide, see the [Wiki](https://github.com/TheSmoothRere/DepleteTell/wiki/Configuration).
 
 ## Support
 

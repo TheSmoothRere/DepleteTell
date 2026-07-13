@@ -7,12 +7,15 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
@@ -28,7 +31,11 @@ public class DepleteTellClient implements ClientModInitializer {
 
     private static void onTooltip(ItemStack itemStack, Item.TooltipContext tooltipContext,
                                   TooltipFlag tooltipFlag, List<Component> components) {
-        if (!itemStack.isDamaged()) return;
+        if (!itemStack.isDamaged() && !CONFIG.alwaysShow().getValue()) return;
+
+        Identifier itemKey = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
+        if (CONFIG.blackListedItem().getValue().values().contains(itemKey.toString()))
+            return;
 
         int maxDurability = itemStack.getMaxDamage();
         int currentDurability = maxDurability - itemStack.getDamageValue();
@@ -37,14 +44,9 @@ public class DepleteTellClient implements ClientModInitializer {
         int durabilityColor = durabilityColor(percent);
 
         MutableComponent durabilityDisplay = switch (CONFIG.durabilityStyle().getValue()) {
-            case PERCENTAGE -> Component.literal(String.format("%.0f%%", percent * 100)).withColor(durabilityColor);
-            case NUMBER_WITH_MAX_DAMAGE -> Component.empty()
-                    .append(Component.literal(String.valueOf(currentDurability))
-                            .withColor(durabilityColor))
-                    .append("/")
-                    .append(Component.literal(String.valueOf(maxDurability))
-                            .withColor(0x00FF00));
-            case NUMBER_WITH_DAMAGE_ONLY -> Component.literal(String.valueOf(currentDurability)).withColor(durabilityColor);
+            case PERCENTAGE -> durabilityPercentage(percent, durabilityColor);
+            case NUMBER -> durabilityNumber(currentDurability, durabilityColor, maxDurability);
+            case BAR -> durabilityBar(percent);
         };
 
         components.add(
@@ -54,31 +56,43 @@ public class DepleteTellClient implements ClientModInitializer {
         );
     }
 
-    private static int durabilityColor(float percent) {
-        percent = Mth.clamp(percent, 0.0F, 1.0F);
-
-        if (percent < 0.5F) {
-            return lerpColor(0xFF0000, 0xFFFF00, percent * 2.0F);
-        } else {
-            return lerpColor(0xFFFF00, 0x00FF00, (percent - 0.5F) * 2.0F);
-        }
+    private static @NonNull MutableComponent durabilityPercentage(float percent, int durabilityColor) {
+        return Component.literal(String.format("%.0f%%", percent * 100)).withColor(durabilityColor);
     }
 
-    private static int lerpColor(int startColor, int endColor, float t) {
-        t = Mth.clamp(t, 0.0F, 1.0F);
+    private static @NonNull MutableComponent durabilityNumber(int currentDurability, int durabilityColor, int maxDurability) {
+        return Component.empty()
+                .append(Component.literal(String.valueOf(currentDurability))
+                        .withColor(durabilityColor))
+                .append("/")
+                .append(Component.literal(String.valueOf(maxDurability))
+                        .withColor(0x00FF00));
+    }
 
-        int sr = (startColor >> 16) & 0xFF;
-        int sg = (startColor >> 8) & 0xFF;
-        int sb = startColor & 0xFF;
+    private static @NonNull MutableComponent durabilityBar(float percent) {
+        final int totalBars = 10;
+        int filledBars = Math.round(percent * totalBars);
 
-        int er = (endColor >> 16) & 0xFF;
-        int eg = (endColor >> 8) & 0xFF;
-        int eb = endColor & 0xFF;
+        MutableComponent component = Component.empty();
 
-        int r = Mth.lerpInt(t, sr, er);
-        int g = Mth.lerpInt(t, sg, eg);
-        int b = Mth.lerpInt(t, sb, eb);
+        for (int i = 0; i < totalBars; i++) {
+            if (i < filledBars) {
+                float barPercent = (float) (i + 1) / totalBars;
+                component.append(Component.literal("❙")
+                        .withColor(durabilityColor(barPercent)));
+            } else {
+                component.append(Component.literal("❙")
+                        .withColor(0x555555));
+            }
+        }
 
-        return (r << 16) | (g << 8) | b;
+        return component;
+    }
+
+    private static int durabilityColor(float percent) {
+        percent = Mth.clamp(percent, 0.0F, 1.0F);
+        percent = percent * percent * (3.0F - 2.0F * percent);
+
+        return Mth.hsvToRgb(percent / 3.0F, 1.0F, 1.0F);
     }
 }

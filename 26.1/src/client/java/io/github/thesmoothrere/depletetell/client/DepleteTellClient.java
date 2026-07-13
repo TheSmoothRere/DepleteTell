@@ -34,7 +34,7 @@ public class DepleteTellClient implements ClientModInitializer {
         if (!itemStack.isDamaged() && !CONFIG.alwaysShow().getValue()) return;
 
         Identifier itemKey = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
-        if (CONFIG.blackListedItem().getValue().values().contains(itemKey.toString()))
+        if (CONFIG.blacklistedItem().getValue().values().contains(itemKey.toString()))
             return;
 
         int maxDurability = itemStack.getMaxDamage();

@@ -12,7 +12,7 @@ import io.github.thesmoothrere.relib.config.option.ListStringOption;
 public class DepleteConfig implements ConfigApi {
     private final BooleanOption alwaysShow = new BooleanOption("alwaysShow", false);
     private final EnumOption<DurabilityStyle> durabilityStyle = new EnumOption<>("durabilityStyle", DurabilityStyle.NUMBER);
-    private final ListStringOption blackListedItem = new ListStringOption("blackListedItem");
+    private final ListStringOption blacklistedItem = new ListStringOption("blacklistedItem");
 
     public BooleanOption alwaysShow() {
         return alwaysShow;
@@ -22,7 +22,7 @@ public class DepleteConfig implements ConfigApi {
         return durabilityStyle;
     }
 
-    public ListStringOption blackListedItem() {
-        return blackListedItem;
+    public ListStringOption blacklistedItem() {
+        return blacklistedItem;
     }
 }

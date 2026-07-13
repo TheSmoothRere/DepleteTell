@@ -1,55 +1,46 @@
 # Deplete Tell
 
-## Description
-Deplete Tell is a mod to show you durability of whatever item that can be damaged as a tooltip.
+Deplete Tell shows the durability of any damageable item directly in its tooltip, so you always know how much life your gear has left at a glance.
 
-## Config
-Here is the following config to fit your preference.
-You can find the config file under relative path where of your instance installed then under `config/depletetell.json`.
-
-#### Default Config
-```json
-{
-  "alwaysShow": false,
-  "blackListedItem": [],
-  "durabilityStyle": "NUMBER"
-}
-```
+## Features
 
 ### Always Show
-Whether to always show the durability. Default is `false` so it only show the durability when the item is damaged.
 
-#### Image Comparison
-**always show true**
+Controls whether durability is always displayed in the tooltip.
 
-![always_true](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/display_type_number.png)
+- **Default:** `false` — durability is only shown once an item is damaged
+- Set to `true` to always show durability, even on undamaged items
 
-**always show false undamaged**
+**Comparison**
 
-![always_false_undamaged](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/always_show_false_undamaged.png)
-
-**always show false damaged**
-
-![always_false_damaged](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/always_show_false_damaged.png)
+|                                                    Always Show: `true`                                                     |                                                       Always Show: `false` (undamaged)                                                        |                                                      Always Show: `false` (damaged)                                                       |
+|:--------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------:|
+| ![always_true](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/display_type_number.png) | ![always_false_undamaged](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/always_show_false_undamaged.png) | ![always_false_damaged](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/always_show_false_damaged.png) |
 
 ### Blacklist
+
+Exclude specific items from durability tooltips.
 
 ![blacklist](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/blacklist_demo.gif)
 
 ### Display Style
-It has 3 different display styles `BAR`, `PERCENTAGE`, `NUMBER`, the default value is `NUMBER`
 
-#### Preview Image
+Choose how durability is displayed. Three styles are available:
 
-**Display type Percentage**
+- `BAR`
+- `PERCENTAGE`
+- `NUMBER` *(default)*
 
-![percentage](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/display_type_percentage.png)
+**Preview**
 
-**Display type Bar**
+|                                                          Percentage                                                           |                                                       Bar                                                       |                                                        Number                                                         |
+|:-----------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------:|
+| ![percentage](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/display_type_percentage.png) | ![bar](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/display_type_bar.png) | ![number](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/display_type_number.png) |
 
-![bar](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/display_type_bar.png)
+## Configuration
 
+For a full configuration guide, see the [Wiki](https://github.com/TheSmoothRere/DepleteTell/wiki).
 
-**Display type Number**
+## Support
 
-![number](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/display_type_number.png)
+If you find this mod useful, consider supporting development via [Ko-fi](https://ko-fi.com/thesmoothrere) or [PayPal](https://paypal.me/thesmoothrere).

@@ -127,10 +127,16 @@ mcModPublisher {
         token = System.getenv("CURSEFORGE_TOKEN")
         projectId = curseforgeId
         environmentType = listOf(EnvironmentType.CLIENT)
+
+        required("fabric-api")
+        required("relib")
     }
 
     modrinth {
         token = System.getenv("MODRINTH_TOKEN")
         projectId = modrinthId
+
+        required("P7dR8mSH")
+        required("pXciMYpV")
     }
 }

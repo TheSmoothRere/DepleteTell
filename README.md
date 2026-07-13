@@ -34,23 +34,8 @@ Set to `true` to always show the durability
 ```
 
 ### Blacklist
-You can add `namespace:item_name` to prevent item to show durability
-
-#### Image Comparison
-
-[//]: # comparison image will go here()
-
-#### Example Config
-Set to `true` to always show the durability
-```json
-{
-  "alwaysShow": true,
-  "blackListedItem": [
-    "minecraft:netherite_shovel"
-  ],
-  "durabilityStyle": "NUMBER"
-}
-```
+You can add `namespace:item_name` to prevent item to show durability.<br>
+![blacklist](https://raw.githubusercontent.com/TheSmoothRere/DepleteTell/refs/heads/main/assets/blacklist_demo.gif)
 
 ### Display Style
 It has 3 different display styles `BAR`, `PERCENTAGE`, `NUMBER`, the default value is `NUMBER`

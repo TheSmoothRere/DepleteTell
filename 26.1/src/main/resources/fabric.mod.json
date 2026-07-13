@@ -29,6 +29,6 @@
   "depends": {
     "minecraft": ">=${minecraftVersion}",
     "java": "~${javaVersion}",
-    "relib": "0.1.1+26.1"
+    "relib": ">=0.1.1+26.1"
   }
 }
